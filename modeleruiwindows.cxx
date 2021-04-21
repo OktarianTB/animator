@@ -49,7 +49,7 @@ Fl_Menu_Item ModelerUIWindows::menu_m_pchoCurveType[] = {
 
 ModelerUIWindows::ModelerUIWindows() {
   Fl_Window* w;
-  { Fl_Window* o = m_pwndMainWnd = new Fl_Window(589, 705, "CS 341Animator (SP02)");
+  { Fl_Window* o = m_pwndMainWnd = new Fl_Window(589, 705, "Alua & Oktarian's Animator");
     w = o;
     o->color(185);
     o->labeltype(FL_NORMAL_LABEL);
@@ -282,7 +282,7 @@ ModelerUIWindows::ModelerUIWindows() {
     }
     o->end();
   }
-  { Fl_Window* o = m_pwndModelerWnd = new Fl_Window(340, 296, "Model");
+  { Fl_Window* o = m_pwndModelerWnd = new Fl_Window(340, 296, "Steve");
     w = o;
     o->user_data((void*)(this));
     o->when(FL_WHEN_NEVER);
