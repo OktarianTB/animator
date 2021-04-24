@@ -27,6 +27,8 @@ public:
 
 	float x;
 	float y;
+
+	friend bool operator==(const Point& p1, const Point& p2);
 };
 
 std::ostream& operator<<(std::ostream& output_stream, const Point& point);

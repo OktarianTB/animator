@@ -1,4 +1,5 @@
 #include "Point.h"
+#include <cmath>
 
 Point::Point(void)
 	:x(0.0),
@@ -24,6 +25,13 @@ void Point::fromStream(std::istream & input_stream)
 {
 	input_stream >> x;
 	input_stream >> y;
+}
+
+bool operator==(const Point& p1, const Point& p2)
+{
+	if (abs(p1.x - p2.x) < 0.01 && abs(p1.y - p2.y) < 0.01)
+		return true;
+	return false;
 }
 
 std::ostream & operator<<(std::ostream & output_stream, const Point & point)

@@ -1,12 +1,13 @@
-#include "LinearCurveEvaluator.h"
+#include "BSplineCurveEvaluator.h"
 #include <assert.h>
 
-void LinearCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts, 
-										 std::vector<Point>& ptvEvaluatedCurvePts, 
-										 const float& fAniLength, 
-										 const bool& bWrap) const
+void BSplineCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
+	std::vector<Point>& ptvEvaluatedCurvePts,
+	const float& fAniLength,
+	const bool& bWrap) const
 {
 	int iCtrlPtCount = ptvCtrlPts.size();
+
 	ptvEvaluatedCurvePts.assign(ptvCtrlPts.begin(), ptvCtrlPts.end());
 
 	float x = 0.0;
@@ -18,11 +19,11 @@ void LinearCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 		// wraparound are equal.
 
 		if ((ptvCtrlPts[0].x + fAniLength) - ptvCtrlPts[iCtrlPtCount - 1].x > 0.0f) {
-			y1 = (ptvCtrlPts[0].y * (fAniLength - ptvCtrlPts[iCtrlPtCount - 1].x) + 
-				  ptvCtrlPts[iCtrlPtCount - 1].y * ptvCtrlPts[0].x) /
-				 (ptvCtrlPts[0].x + fAniLength - ptvCtrlPts[iCtrlPtCount - 1].x);
+			y1 = (ptvCtrlPts[0].y * (fAniLength - ptvCtrlPts[iCtrlPtCount - 1].x) +
+				ptvCtrlPts[iCtrlPtCount - 1].y * ptvCtrlPts[0].x) /
+				(ptvCtrlPts[0].x + fAniLength - ptvCtrlPts[iCtrlPtCount - 1].x);
 		}
-		else 
+		else
 			y1 = ptvCtrlPts[0].y;
 	}
 	else {
@@ -30,16 +31,16 @@ void LinearCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 		// the curve horizontal.
 
 		y1 = ptvCtrlPts[0].y;
-    }
+	}
 
 	ptvEvaluatedCurvePts.push_back(Point(x, y1));
 
 	/// set the endpoint based on the wrap flag.
 	float y2;
-    x = fAniLength;
-    if (bWrap)
+	x = fAniLength;
+	if (bWrap)
 		y2 = y1;
-    else
+	else
 		y2 = ptvCtrlPts[iCtrlPtCount - 1].y;
 
 	ptvEvaluatedCurvePts.push_back(Point(x, y2));

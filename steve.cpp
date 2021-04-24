@@ -165,8 +165,8 @@ void Steve::drawHead()
 	glRotated(-90, 1.0, 0.0, 0.0);
 	glTranslated(0.5, -0.5, 0.80);
 	glRotated(VAL(ROTATE_HEAD_X), 1, 0, 0);
-	glRotated(4, 0, 1, 0);
-	glRotated(16, 0, 0, 1);
+	glRotated(VAL(ROTATE_HEAD_Y), 0, 1, 0);
+	glRotated(VAL(ROTATE_HEAD_Z), 0, 0, 1);
 	drawCylinder(VAL(HEIGHT_NECK), 0.24, 0.24);
 	glTranslated(0, 0, VAL(HEIGHT_NECK) - 0.2);
 	glRotated(90, 1.0, 0.0, 0.0);
@@ -536,9 +536,9 @@ int main()
 	controls[YPOS] = ModelerControl("Y Position", 0, 5, 0.1f, 0);
 	controls[ZPOS] = ModelerControl("Z Position", -5, 5, 0.1f, 0);
 	controls[HEIGHT_NECK] = ModelerControl("Neck Height", 0.2, 1, 0.05f, 0.4);
-	controls[ROTATE_HEAD_X] = ModelerControl("Rotate Head X", -60, 60, 1, 0);
-	controls[ROTATE_HEAD_Y] = ModelerControl("Rotate Head Y", -60, 60, 1, 0);
-	controls[ROTATE_HEAD_Z] = ModelerControl("Rotate Head Z", -135, 135, 1, 0);
+	controls[ROTATE_HEAD_X] = ModelerControl("Rotate Head X", -30, 30, 1, 0);
+	controls[ROTATE_HEAD_Y] = ModelerControl("Rotate Head Y", -30, 30, 1, 0);
+	controls[ROTATE_HEAD_Z] = ModelerControl("Rotate Head Z", -60, 60, 1, 0);
 	controls[ROTATE_RIGHT_ARM_SHOULDER] = ModelerControl("Rotate Right Arm Shoulder", -135, 135, 1, 0);
 	controls[ROTATE_RIGHT_ARM_ELBOW] = ModelerControl("Rotate Right Arm Elbow", -20, 50, 1, 30);
 	controls[ROTATE_LEFT_ARM_SHOULDER] = ModelerControl("Rotate Left Arm Shoulder", -135, 135, 1, 0);
