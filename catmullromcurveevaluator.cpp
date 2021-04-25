@@ -81,7 +81,7 @@ void CatmullRomCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPt
 			}
 		}
 
-		// If sufficient control points, create bezier curve
+		// If sufficient control points, create catmull-rom curve
 		if (i + 3 < iCtrlPtCount)
 		{
 			float previous_x = 0; // fixes bug with monotically increasing x
@@ -124,7 +124,7 @@ Point CatmullRomCurveEvaluator::evaluatePoint(float t, Point p1, Point p2, Point
 
 	Point k4 = p3;
 
-	// Formula for cubic Bezier curve: (1-t)^3 * P0 + 3 * (1-t)^2 * P1 + 3 * (1-t)^2 * P2 + t^3 * P4
+	// Formula for cubic Bezier curve: (1-t)^3 * P0 + 3 * t * (1-t)^2 * P1 + 3 * t^2 * (1-t) * P2 + t^3 * P4
 
 	float t2 = (1 - t) * (1 - t); // (1-t)^2
 	float t3 = t2 * (1 - t); // (1-t)^3

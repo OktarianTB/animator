@@ -95,7 +95,7 @@ void BezierCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 
 Point BezierCurveEvaluator::evaluatePoint(float t, Point p0, Point p1, Point p2, Point p3) const
 {
-	// Formula for cubic Bezier curve: (1-t)^3 * P0 + 3 * (1-t)^2 * P1 + 3 * (1-t)^2 * P2 + t^3 * P4
+	// Formula for cubic Bezier curve: (1-t)^3 * P0 + 3 * t * (1-t)^2 * P1 + 3 * t^2 * (1-t) * P2 + t^3 * P4
 
 	float t2 = (1 - t) * (1 - t); // (1-t)^2
 	float t3 = t2 * (1 - t); // (1-t)^3

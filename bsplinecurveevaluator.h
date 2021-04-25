@@ -14,6 +14,7 @@ public:
 		std::vector<Point>& ptvEvaluatedCurvePts,
 		const float& fAniLength,
 		const bool& bWrap) const;
+	Point evaluatePoint(float t, Point p0, Point p1, Point p2, Point p3) const;
 };
 
 #endif#pragma once
