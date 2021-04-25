@@ -29,6 +29,16 @@ public:
 	float y;
 
 	friend bool operator==(const Point& p1, const Point& p2);
+
+	Point operator+(const Point& p) {
+		Point box(x + p.x, y + p.y);
+		return box;
+	}
+
+	Point operator-(const Point& p) {
+		Point box(x - p.x, y - p.y);
+		return box;
+	}
 };
 
 std::ostream& operator<<(std::ostream& output_stream, const Point& point);
