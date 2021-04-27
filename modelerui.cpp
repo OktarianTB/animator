@@ -28,6 +28,8 @@
 
 using namespace std;
 
+float ModelerUI::tension = 0.8;
+
 inline void ModelerUI::cb_openAniScript_i(Fl_Menu_*, void*)
 {
 	char *szFileName = fl_file_chooser("Open Animation Script", "*.ani", NULL);
@@ -239,6 +241,29 @@ inline void ModelerUI::cb_aniLen_i(Fl_Menu_*, void*)
 void ModelerUI::cb_aniLen(Fl_Menu_* o, void* v) 
 {
 	((ModelerUI*)(o->parent()->user_data()))->cb_aniLen_i(o,v);
+}
+
+inline void ModelerUI::cb_tension_i(Fl_Menu_*, void*)
+{
+	float newTension;
+	const char* tensionStr = NULL;
+
+	tensionStr = fl_input("New Catmull-Rom Tension (0.5 - 2.0)", "0.8");
+
+	if (tensionStr) {
+		newTension = stof(tensionStr);
+		tension = max(0.5, min(newTension, 2));
+		std::cout << "New tension: " << tension << std::endl;
+
+		m_pwndGraphWidget->getCurrentCurve()->setDirty();
+		m_pwndGraphWidget->getCurrentCurve()->drawCurve();
+		m_pwndGraphWidget->redraw();
+	}
+}
+
+void ModelerUI::cb_tension(Fl_Menu_* o, void* v)
+{
+	((ModelerUI*)(o->parent()->user_data()))->cb_tension_i(o, v);
 }
 
 inline void ModelerUI::cb_fps_i(Fl_Slider*, void*) 
@@ -888,6 +913,10 @@ m_bSaveMovie(false)
 	m_pmiLowQuality->callback((Fl_Callback*)cb_low);
 	m_pmiPoorQuality->callback((Fl_Callback*)cb_poor);
 	m_pmiSetAniLen->callback((Fl_Callback*)cb_aniLen);
+
+	// Added by okto
+	m_pmiSetTension->callback((Fl_Callback*)cb_tension);
+
 	m_pbrsBrowser->callback((Fl_Callback*)cb_browser);
 	m_ptabTab->callback((Fl_Callback*)cb_tab);
 	m_pwndGraphWidget->callback((Fl_Callback*)cb_graphWidget);

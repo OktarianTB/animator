@@ -42,6 +42,8 @@ public:
 	void redrawModelerView();
     void autoLoadNPlay();
 
+	static float getTension() { return tension; }
+
 protected:
 
 	Fl_Box* labelBox(int nBox);
@@ -63,6 +65,8 @@ private:
 	float m_fPlayStartTime, m_fPlayEndTime;
 	std::string m_strMovieFileName;
 	int m_iMovieFrameNum;
+
+	static float tension; // catmull-rom tension
 
 	inline void cb_openAniScript_i(Fl_Menu_*, void*);
 	static void cb_openAniScript(Fl_Menu_*, void*);
@@ -92,6 +96,11 @@ private:
 	static void cb_poor(Fl_Menu_*, void*);
 	inline void cb_aniLen_i(Fl_Menu_*, void*);
 	static void cb_aniLen(Fl_Menu_*, void*);
+
+	// Added by okto
+	inline void cb_tension_i(Fl_Menu_*, void*);
+	static void cb_tension(Fl_Menu_*, void*);
+
 	inline void cb_fps_i(Fl_Slider*, void*);
 	static void cb_fps(Fl_Slider*, void*);
 	inline void cb_m_modelerWindow_i(Fl_Window*, void*);

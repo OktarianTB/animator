@@ -1,6 +1,8 @@
 #include "BSplineCurveEvaluator.h"
 #include <assert.h>
 
+using namespace std;
+
 void BSplineCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 	std::vector<Point>& ptvEvaluatedCurvePts,
 	const float& fAniLength,
@@ -65,9 +67,10 @@ void BSplineCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 		}
 
 		// If sufficient control points, create b-spline curve
-		else if (i + 3 < iCtrlPtCount)
+		if (i + 3 < iCtrlPtCount)
 		{
 			float previous_x = 0;
+			
 			for (int seg = 1; seg <= numSegments; seg++)
 			{
 				float t = seg * step;

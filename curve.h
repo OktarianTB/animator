@@ -53,6 +53,8 @@ public:
 	void toStream(std::ostream& output_stream) const;
 	void fromStream(std::istream& input_stream);
 
+	void setDirty() { m_bDirty = true; }
+
 protected:
 	void init(const float fStartYValue = 0.0f);
 	void reevaluate(void) const;

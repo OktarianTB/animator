@@ -4,6 +4,7 @@
 #pragma warning(disable : 4786)  
 
 #include "CurveEvaluator.h"
+#include "modelerui.h"
 
 //using namespace std;
 
@@ -23,8 +24,6 @@ public:
 		const float& fAniLength,
 		const bool& bWrap) const;
 	Point evaluatePoint(float t, Point p1, Point p2, Point p3, Point p4) const;
-
-	float tension = 0.9;
 };
 
 #endif#pragma once

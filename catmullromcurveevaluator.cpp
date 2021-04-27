@@ -112,6 +112,8 @@ Point CatmullRomCurveEvaluator::evaluatePoint(float t, Point p1, Point p2, Point
 {
 	// From https://pomax.github.io/bezierinfo/#catmullconv
 
+	float tension = ModelerUI::getTension();
+
 	Point k1 = p2;
 
 	float k2_x = p2.x + (p3.x - p1.x) / (6 * tension);

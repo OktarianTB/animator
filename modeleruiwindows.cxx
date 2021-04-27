@@ -19,8 +19,9 @@ Fl_Menu_Item ModelerUIWindows::menu_m_pmbMenuBar[] = {
  {"&Low Quality", 0,  0, 0, 8, 0, 0, 14, 0},
  {"&Poor Quality", 0,  0, 0, 8, 0, 0, 14, 0},
  {0},
- {"&Animation", 0,  0, 0, 64, 0, 0, 14, 0},
+ {"&Parameters", 0,  0, 0, 64, 0, 0, 14, 0},
  {"&Set Animation Length", 0,  0, 0, 0, 0, 0, 14, 0},
+ {"&Set Tension", 0,  0, 0, 0, 0, 0, 14, 0},
  {0},
  {0}
 };
@@ -29,6 +30,7 @@ Fl_Menu_Item* ModelerUIWindows::m_pmiSaveAniScript = ModelerUIWindows::menu_m_pm
 Fl_Menu_Item* ModelerUIWindows::m_pmiSaveBitmapFile = ModelerUIWindows::menu_m_pmbMenuBar + 3;
 Fl_Menu_Item* ModelerUIWindows::m_pmiSaveMovie = ModelerUIWindows::menu_m_pmbMenuBar + 4;
 Fl_Menu_Item* ModelerUIWindows::m_pmiExit = ModelerUIWindows::menu_m_pmbMenuBar + 5;
+
 Fl_Menu_Item* ModelerUIWindows::m_pmiNormal = ModelerUIWindows::menu_m_pmbMenuBar + 8;
 Fl_Menu_Item* ModelerUIWindows::m_pmiFlatShaded = ModelerUIWindows::menu_m_pmbMenuBar + 9;
 Fl_Menu_Item* ModelerUIWindows::m_pmiWireFrame = ModelerUIWindows::menu_m_pmbMenuBar + 10;
@@ -36,7 +38,10 @@ Fl_Menu_Item* ModelerUIWindows::m_pmiHightQuality = ModelerUIWindows::menu_m_pmb
 Fl_Menu_Item* ModelerUIWindows::m_pmiMediumQuality = ModelerUIWindows::menu_m_pmbMenuBar + 12;
 Fl_Menu_Item* ModelerUIWindows::m_pmiLowQuality = ModelerUIWindows::menu_m_pmbMenuBar + 13;
 Fl_Menu_Item* ModelerUIWindows::m_pmiPoorQuality = ModelerUIWindows::menu_m_pmbMenuBar + 14;
+
 Fl_Menu_Item* ModelerUIWindows::m_pmiSetAniLen = ModelerUIWindows::menu_m_pmbMenuBar + 17;
+
+Fl_Menu_Item* ModelerUIWindows::m_pmiSetTension = ModelerUIWindows::menu_m_pmbMenuBar + 18;
 
 Fl_Menu_Item ModelerUIWindows::menu_m_pchoCurveType[] = {
  {"Linear", 0,  0, 0, 0, 0, 0, 12, 0},

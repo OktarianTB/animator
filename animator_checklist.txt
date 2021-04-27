@@ -1,11 +1,12 @@
 Animator Bells and Whistles Checklist for grading 
 (submit ONLY if you have implemented any of the B&Ws below)
 
-HKUST login(s):
+HKUST login(s): ogt@connect.ust.hk + ashyntay@connect.ust.hk
 
-Delete yes/no when appropriate
+Total = 2.5B
 
-W spline control options			yes/no
+W spline control options			
+	- Control the tension of the Catmull-Rom spline		yes
 W TGA						yes/no
 W mirror					yes/no
 W billboard					yes/no
@@ -23,7 +24,7 @@ B metaballs					yes/no
 BW lens flare					yes/no
 BW your great UI idea				yes/no
 2B flocks					yes/no
-2B C2 interpolating curve			yes/no
+2B C2 interpolating curve					yes
 2B edit CR curves				yes/no
 2B UI to select model parts by clicking		yes/no
 2B quaternions					yes/no

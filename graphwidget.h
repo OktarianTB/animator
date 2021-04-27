@@ -114,6 +114,10 @@ public:
 	Point windowToGrid( Point p ) ;
 	Point gridToWindow( Point p ) ;
 
+	Curve* getCurrentCurve() const {
+		return m_pcrvvCurves[m_iCurrCurve];
+	}
+
 protected:
 	int m_iEventToDo;
 	bool m_bHasEvent;
