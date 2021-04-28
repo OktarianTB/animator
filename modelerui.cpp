@@ -30,6 +30,7 @@ using namespace std;
 
 float ModelerUI::tension = 0.8;
 float ModelerUI::curveFlatness = 1.005;
+bool  ModelerUI::skyboxActive = false;
 
 inline void ModelerUI::cb_openAniScript_i(Fl_Menu_*, void*)
 {
@@ -288,6 +289,17 @@ inline void ModelerUI::cb_flatness_i(Fl_Menu_*, void*)
 void ModelerUI::cb_flatness(Fl_Menu_* o, void* v)
 {
 	((ModelerUI*)(o->parent()->user_data()))->cb_flatness_i(o, v);
+}
+
+inline void ModelerUI::cb_skybox_i(Fl_Menu_*, void*)
+{
+	skyboxActive = !skyboxActive;
+	m_pwndModelerView->redraw();
+}
+
+void ModelerUI::cb_skybox(Fl_Menu_* o, void* v)
+{
+	((ModelerUI*)(o->parent()->user_data()))->cb_skybox_i(o, v);
 }
 
 inline void ModelerUI::cb_fps_i(Fl_Slider*, void*) 
@@ -941,6 +953,7 @@ m_bSaveMovie(false)
 	// Added by okto
 	m_pmiSetTension->callback((Fl_Callback*)cb_tension);
 	m_pmiSetFlatness->callback((Fl_Callback*)cb_flatness);
+	m_pmiSkybox->callback((Fl_Callback*)cb_skybox);
 
 	m_pbrsBrowser->callback((Fl_Callback*)cb_browser);
 	m_ptabTab->callback((Fl_Callback*)cb_tab);

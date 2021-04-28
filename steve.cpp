@@ -7,8 +7,10 @@
 #include "modelerview.h"
 #include "modelerapp.h"
 #include "modelerdraw.h"
+#include "modelerui.h"
 #include "bitmap.h"
 #include "particleSystem.h"
+#include "camera.h"
 
 #include <FL/gl.h>
 #include <stdlib.h>
@@ -59,6 +61,7 @@ public:
     virtual void draw();
 
 	void drawFloor();
+	void drawSkybox();
 
 	void drawHead();
 	void drawHeart();
@@ -76,6 +79,18 @@ private:
 	int ironTextureWidth, ironTextureHeight;
 	GLubyte* ironTexture = NULL;
 	GLuint ironTextureID;
+	
+	int sbWidth0, sbWidth1, sbWidth2, sbWidth3, sbWidth4, sbWidth5;
+	int sbHeight0, sbHeight1, sbHeight2, sbHeight3, sbHeight4, sbHeight5;
+
+	GLubyte* sbTexture0 = NULL;
+	GLubyte* sbTexture1 = NULL;
+	GLubyte* sbTexture2 = NULL;
+	GLubyte* sbTexture3 = NULL;
+	GLubyte* sbTexture4 = NULL;
+	GLubyte* sbTexture5 = NULL;
+
+	GLuint sbTextureID0, sbTextureID1, sbTextureID2, sbTextureID3, sbTextureID4, sbTextureID5;
 };
 
 Steve::Steve(int x, int y, int w, int h, char* label) : ModelerView(x, y, w, h, label)
@@ -85,7 +100,42 @@ Steve::Steve(int x, int y, int w, int h, char* label) : ModelerView(x, y, w, h, 
 
 	ironTexture = readBMP("iron.bmp", ironTextureWidth, ironTextureHeight);
 	glGenTextures(1, &ironTextureID);
+	
+	// front
+	if (sbTexture0)
+		delete[] sbTexture0;
+	sbTexture0 = readBMP("front.bmp", sbWidth0, sbHeight0);
+	glGenTextures(1, &sbTextureID0);
 
+	// left
+	if (sbTexture1)
+		delete[] sbTexture1;
+	sbTexture1 = readBMP("left.bmp", sbWidth1, sbHeight1);
+	glGenTextures(1, &sbTextureID1);
+
+	// back
+	if (sbTexture2)
+		delete[] sbTexture2;
+	sbTexture2 = readBMP("back.bmp", sbWidth2, sbHeight2);
+	glGenTextures(1, &sbTextureID2);
+
+	// right
+	if (sbTexture3)
+		delete[] sbTexture3;
+	sbTexture3 = readBMP("right.bmp", sbWidth3, sbHeight3);
+	glGenTextures(1, &sbTextureID3);
+
+	// top
+	if (sbTexture4)
+		delete[] sbTexture4;
+	sbTexture4 = readBMP("top.bmp", sbWidth4, sbHeight4);
+	glGenTextures(1, &sbTextureID4);
+
+	// bottom
+	if (sbTexture5)
+		delete[] sbTexture5;
+	sbTexture5 = readBMP("bottom.bmp", sbWidth5, sbHeight5);
+	glGenTextures(1, &sbTextureID5);
 }
 
 ModelerView* createSteve(int x, int y, int w, int h, char *label)
@@ -100,6 +150,10 @@ void Steve::draw()
 
 	// This call takes care of a lot of the nasty projection matrix stuff
 	ModelerView::draw();
+
+	// Draw skybox
+	if(ModelerUI::getSkyboxActive())
+		drawSkybox();
 
 	// Draw the floor
 	drawFloor();
@@ -118,6 +172,103 @@ void Steve::drawFloor()
 	glPushMatrix();
 	glTranslated(-5, 0, -5);
 	drawBox(10, 0.01f, 10);
+	glPopMatrix();
+}
+
+void Steve::drawSkybox()
+{
+	// Store the current matrix
+	glPushMatrix();
+	
+	// Center skybox around the camera
+	Vec3f pos = m_camera->getCameraPosition();
+	glTranslated(pos[0], pos[1], pos[2]);
+
+	// Enable/Disable features
+	glPushAttrib(GL_ENABLE_BIT);
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_BLEND);
+
+	// Just in case we set all vertices to white.
+	glColor4f(1, 1, 1, 1);
+
+	// Scale appropriately
+	glScaled(3, 3, 3);
+
+	// Parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+	// Render the front quad
+	glBindTexture(GL_TEXTURE_2D, sbTextureID0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, sbWidth0, sbHeight0, 0, GL_RGB, GL_UNSIGNED_BYTE, sbTexture0);
+
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(0.5f, -0.5f, -0.5f);
+	glTexCoord2f(1, 0); glVertex3f(-0.5f, -0.5f, -0.5f);
+	glTexCoord2f(1, 1); glVertex3f(-0.5f, 0.5f, -0.5f);
+	glTexCoord2f(0, 1); glVertex3f(0.5f, 0.5f, -0.5f);
+	glEnd();
+
+	// Render the left quad
+	glBindTexture(GL_TEXTURE_2D, sbTextureID1);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, sbWidth1, sbHeight1, 0, GL_RGB, GL_UNSIGNED_BYTE, sbTexture1);
+
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(0.5f, -0.5f, 0.5f);
+	glTexCoord2f(1, 0); glVertex3f(0.5f, -0.5f, -0.5f);
+	glTexCoord2f(1, 1); glVertex3f(0.5f, 0.5f, -0.5f);
+	glTexCoord2f(0, 1); glVertex3f(0.5f, 0.5f, 0.5f);
+	glEnd();
+
+	// Render the back quad
+	glBindTexture(GL_TEXTURE_2D, sbTextureID2);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, sbWidth2, sbHeight2, 0, GL_RGB, GL_UNSIGNED_BYTE, sbTexture2);
+
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(-0.5f, -0.5f, 0.5f);
+	glTexCoord2f(1, 0); glVertex3f(0.5f, -0.5f, 0.5f);
+	glTexCoord2f(1, 1); glVertex3f(0.5f, 0.5f, 0.5f);
+	glTexCoord2f(0, 1); glVertex3f(-0.5f, 0.5f, 0.5f);
+	glEnd();
+
+	// Render the right quad
+	glBindTexture(GL_TEXTURE_2D, ironTextureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, sbWidth3, sbHeight3, 0, GL_RGB, GL_UNSIGNED_BYTE, sbTexture3);
+
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(-0.5f, -0.5f, -0.5f);
+	glTexCoord2f(1, 0); glVertex3f(-0.5f, -0.5f, 0.5f);
+	glTexCoord2f(1, 1); glVertex3f(-0.5f, 0.5f, 0.5f);
+	glTexCoord2f(0, 1); glVertex3f(-0.5f, 0.5f, -0.5f);
+	glEnd();
+
+	// Render the top quad
+	glBindTexture(GL_TEXTURE_2D, ironTextureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, sbWidth4, sbHeight4, 0, GL_RGB, GL_UNSIGNED_BYTE, sbTexture4);
+
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 1); glVertex3f(-0.5f, 0.5f, -0.5f);
+	glTexCoord2f(0, 0); glVertex3f(-0.5f, 0.5f, 0.5f);
+	glTexCoord2f(1, 0); glVertex3f(0.5f, 0.5f, 0.5f);
+	glTexCoord2f(1, 1); glVertex3f(0.5f, 0.5f, -0.5f);
+	glEnd();
+
+	// Render the bottom quad
+	glBindTexture(GL_TEXTURE_2D, ironTextureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, sbWidth5, sbHeight5, 0, GL_RGB, GL_UNSIGNED_BYTE, sbTexture5);
+
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(-0.5f, -0.5f, -0.5f);
+	glTexCoord2f(0, 1); glVertex3f(-0.5f, -0.5f, 0.5f);
+	glTexCoord2f(1, 1); glVertex3f(0.5f, -0.5f, 0.5f);
+	glTexCoord2f(1, 0); glVertex3f(0.5f, -0.5f, -0.5f);
+	glEnd();
+
+	// Restore enable bits and matrix
+	glPopAttrib();
 	glPopMatrix();
 }
 

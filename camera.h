@@ -46,6 +46,8 @@ protected:
     
 public:
     
+    Vec3f getCameraPosition() { return mPosition; }
+
     //---[ Constructors ]----------------------------------
     
     // defaults to (0,0,0) facing down negative z axis

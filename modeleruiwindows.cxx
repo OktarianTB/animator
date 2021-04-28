@@ -23,6 +23,7 @@ Fl_Menu_Item ModelerUIWindows::menu_m_pmbMenuBar[] = {
  {"&Set Animation Length", 0,  0, 0, 0, 0, 0, 14, 0},
  {"&Set Tension", 0,  0, 0, 0, 0, 0, 14, 0},
  {"&Set Flatness", 0,  0, 0, 0, 0, 0, 14, 0},
+ {"&Skybox", 0,  0, 0, 2, 0, 0, 14, 0},
  {0},
  {0}
 };
@@ -43,6 +44,7 @@ Fl_Menu_Item* ModelerUIWindows::m_pmiPoorQuality = ModelerUIWindows::menu_m_pmbM
 Fl_Menu_Item* ModelerUIWindows::m_pmiSetAniLen = ModelerUIWindows::menu_m_pmbMenuBar + 17;
 Fl_Menu_Item* ModelerUIWindows::m_pmiSetTension = ModelerUIWindows::menu_m_pmbMenuBar + 18;
 Fl_Menu_Item* ModelerUIWindows::m_pmiSetFlatness = ModelerUIWindows::menu_m_pmbMenuBar + 19;
+Fl_Menu_Item* ModelerUIWindows::m_pmiSkybox = ModelerUIWindows::menu_m_pmbMenuBar + 20;
 
 Fl_Menu_Item ModelerUIWindows::menu_m_pchoCurveType[] = {
  {"Linear", 0,  0, 0, 0, 0, 0, 12, 0},
