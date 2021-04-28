@@ -16,8 +16,6 @@ public:
 		const bool& bWrap) const;
 
 	Point evaluatePoint(float t, Point p0, Point p1, Point p2, Point p3) const;
-	Point evaluateLinearPoint(float t, Point p0, Point p1) const;
-	float findEdgeT(Point p0, Point p1, float edge) const;
 };
 
 #endif#pragma once

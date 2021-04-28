@@ -146,6 +146,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="adaptivebeziercurveevaluator.cpp" />
     <ClCompile Include="beziercurveevaluator.cpp" />
     <ClCompile Include="bsplinecurveevaluator.cpp" />
     <ClCompile Include="c2curveevaluator.cpp" />
@@ -266,6 +267,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="adaptivebeziercurveevaluator.h" />
     <ClInclude Include="beziercurveevaluator.h" />
     <ClInclude Include="bsplinecurveevaluator.h" />
     <ClInclude Include="c2curveevaluator.h" />

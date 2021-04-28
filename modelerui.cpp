@@ -29,6 +29,7 @@
 using namespace std;
 
 float ModelerUI::tension = 0.8;
+float ModelerUI::curveFlatness = 1.005;
 
 inline void ModelerUI::cb_openAniScript_i(Fl_Menu_*, void*)
 {
@@ -264,6 +265,29 @@ inline void ModelerUI::cb_tension_i(Fl_Menu_*, void*)
 void ModelerUI::cb_tension(Fl_Menu_* o, void* v)
 {
 	((ModelerUI*)(o->parent()->user_data()))->cb_tension_i(o, v);
+}
+
+inline void ModelerUI::cb_flatness_i(Fl_Menu_*, void*)
+{
+	float newTension;
+	const char* flatnessStr = NULL;
+
+	flatnessStr = fl_input("New Bezier Curve Flatness (> 1 && < 2)", "1.005");
+
+	if (flatnessStr) {
+		newTension = stof(flatnessStr);
+		curveFlatness = max(1, min(newTension, 2));
+		std::cout << "New bezier curve flatness: " << curveFlatness << std::endl;
+
+		m_pwndGraphWidget->getCurrentCurve()->setDirty();
+		m_pwndGraphWidget->getCurrentCurve()->drawCurve();
+		m_pwndGraphWidget->redraw();
+	}
+}
+
+void ModelerUI::cb_flatness(Fl_Menu_* o, void* v)
+{
+	((ModelerUI*)(o->parent()->user_data()))->cb_flatness_i(o, v);
 }
 
 inline void ModelerUI::cb_fps_i(Fl_Slider*, void*) 
@@ -916,6 +940,7 @@ m_bSaveMovie(false)
 
 	// Added by okto
 	m_pmiSetTension->callback((Fl_Callback*)cb_tension);
+	m_pmiSetFlatness->callback((Fl_Callback*)cb_flatness);
 
 	m_pbrsBrowser->callback((Fl_Callback*)cb_browser);
 	m_ptabTab->callback((Fl_Callback*)cb_tab);

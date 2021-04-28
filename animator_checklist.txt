@@ -3,10 +3,10 @@ Animator Bells and Whistles Checklist for grading
 
 HKUST login(s): ogt@connect.ust.hk + ashyntay@connect.ust.hk
 
-Total = 2.5B
+Total = 3.5B
 
 W spline control options			
-	- Control the tension of the Catmull-Rom spline		yes
+	- Control the tension of the Catmull-Rom spline		yes 	0.5B
 W TGA						yes/no
 W mirror					yes/no
 W billboard					yes/no
@@ -15,7 +15,8 @@ W environment mapping				yes/no
 W motion blur					yes/no
 W Runge-Kutta					yes/no
 W OpenGL Display list				yes/no
-W de Casteljau					yes/no
+W de Casteljau							yes	1B
+	+ flatness parameter
 B spring-mass system				yes/no
 B collision detection AND handling		yes/no
 B general subdvision curves			yes/no
@@ -24,7 +25,7 @@ B metaballs					yes/no
 BW lens flare					yes/no
 BW your great UI idea				yes/no
 2B flocks					yes/no
-2B C2 interpolating curve					yes
+2B C2 interpolating curve					yes	2B
 2B edit CR curves				yes/no
 2B UI to select model parts by clicking		yes/no
 2B quaternions					yes/no

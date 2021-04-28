@@ -43,6 +43,7 @@ public:
     void autoLoadNPlay();
 
 	static float getTension() { return tension; }
+	static float getFlatness() { return curveFlatness; }
 
 protected:
 
@@ -67,6 +68,7 @@ private:
 	int m_iMovieFrameNum;
 
 	static float tension; // catmull-rom tension
+	static float curveFlatness; // adaptive bezier curve flatness
 
 	inline void cb_openAniScript_i(Fl_Menu_*, void*);
 	static void cb_openAniScript(Fl_Menu_*, void*);
@@ -100,6 +102,9 @@ private:
 	// Added by okto
 	inline void cb_tension_i(Fl_Menu_*, void*);
 	static void cb_tension(Fl_Menu_*, void*);
+	inline void cb_flatness_i(Fl_Menu_*, void*);
+	static void cb_flatness(Fl_Menu_*, void*);
+
 
 	inline void cb_fps_i(Fl_Slider*, void*);
 	static void cb_fps(Fl_Slider*, void*);

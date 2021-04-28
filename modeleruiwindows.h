@@ -44,6 +44,7 @@ public:
   static Fl_Menu_Item *m_pmiPoorQuality;
   static Fl_Menu_Item *m_pmiSetAniLen;
   static Fl_Menu_Item *m_pmiSetTension; // for catmull-rom curve
+  static Fl_Menu_Item* m_pmiSetFlatness; // for adaptive bezier curve
 
   Fl_Browser *m_pbrsBrowser;
   Fl_Tabs *m_ptabTab;

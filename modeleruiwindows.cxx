@@ -22,6 +22,7 @@ Fl_Menu_Item ModelerUIWindows::menu_m_pmbMenuBar[] = {
  {"&Parameters", 0,  0, 0, 64, 0, 0, 14, 0},
  {"&Set Animation Length", 0,  0, 0, 0, 0, 0, 14, 0},
  {"&Set Tension", 0,  0, 0, 0, 0, 0, 14, 0},
+ {"&Set Flatness", 0,  0, 0, 0, 0, 0, 14, 0},
  {0},
  {0}
 };
@@ -40,8 +41,8 @@ Fl_Menu_Item* ModelerUIWindows::m_pmiLowQuality = ModelerUIWindows::menu_m_pmbMe
 Fl_Menu_Item* ModelerUIWindows::m_pmiPoorQuality = ModelerUIWindows::menu_m_pmbMenuBar + 14;
 
 Fl_Menu_Item* ModelerUIWindows::m_pmiSetAniLen = ModelerUIWindows::menu_m_pmbMenuBar + 17;
-
 Fl_Menu_Item* ModelerUIWindows::m_pmiSetTension = ModelerUIWindows::menu_m_pmbMenuBar + 18;
+Fl_Menu_Item* ModelerUIWindows::m_pmiSetFlatness = ModelerUIWindows::menu_m_pmbMenuBar + 19;
 
 Fl_Menu_Item ModelerUIWindows::menu_m_pchoCurveType[] = {
  {"Linear", 0,  0, 0, 0, 0, 0, 12, 0},
@@ -49,6 +50,7 @@ Fl_Menu_Item ModelerUIWindows::menu_m_pchoCurveType[] = {
  {"Bezier", 0,  0, 0, 0, 0, 0, 12, 0},
  {"Catmull-Rom", 0,  0, 0, 0, 0, 0, 12, 0},
  {"C2-Interpolating", 0,  0, 0, 0, 0, 0, 12, 0},
+ {"Adaptive Bezier", 0,  0, 0, 0, 0, 0, 12, 0},
  {0}
 };
 
