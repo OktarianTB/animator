@@ -30,6 +30,7 @@
 #include "CatmullRomCurveEvaluator.h"
 #include "C2CurveEvaluator.h" 
 #include "AdaptiveBezierCurveEvaluator.h"
+#include "LaneRiesenfeldCurveEvaluator.h"
 
 #define LEFT		1
 #define MIDDLE		2
@@ -126,7 +127,7 @@ m_flcCurrCurve(FL_BLACK)
 	// Note that C2-Interpolating curve is not a requirement
 	m_ppceCurveEvaluators[CURVE_TYPE_C2INTERPOLATING] = new C2CurveEvaluator();
 	m_ppceCurveEvaluators[CURVE_TYPE_ADAPTIVE_BEZIER] = new AdaptiveBezierCurveEvaluator();
-
+	m_ppceCurveEvaluators[CURVE_TYPE_LANE_RIESENFELD] = new LaneRiesenfeldCurveEvaluator();
 }
 
 GraphWidget::~GraphWidget()

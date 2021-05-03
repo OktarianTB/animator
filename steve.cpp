@@ -11,6 +11,7 @@
 #include "bitmap.h"
 #include "particleSystem.h"
 #include "camera.h"
+#include "IK.h"
 
 #include <FL/gl.h>
 #include <stdlib.h>
@@ -21,6 +22,9 @@
 #define MAX_VEL 200
 #define MIN_STEP 0.1
 #define PI 3.14159
+
+#define deg2rad(x) (x * (PI / 180))
+#define rad2deg(x) ((x * 180.0) / PI)
 
 // Colors
 #define COLOR_BLACK		    0.00f, 0.00f, 0.00f
@@ -50,6 +54,7 @@ enum SteveControls
 	ROTATE_HEAD_X, ROTATE_HEAD_Y, ROTATE_HEAD_Z, 
 	ROTATE_RIGHT_ARM_SHOULDER, ROTATE_LEFT_ARM_SHOULDER, 
 	ROTATE_RIGHT_ARM_ELBOW, ROTATE_LEFT_ARM_ELBOW,
+	IK_X, IK_Y, IK_Z,
 	PARTICLE_COUNT, 
 	NUMCONTROLS,
 };
@@ -75,7 +80,12 @@ public:
 	void drawLeftArm();
 	void drawRightArm();
 	void drawFace();
+
+	// Inverse kinematics
+	void drawMechanicalArm();
 private:
+	IK* ik;
+
 	int ironTextureWidth, ironTextureHeight;
 	GLubyte* ironTexture = NULL;
 	GLuint ironTextureID;
@@ -95,6 +105,8 @@ private:
 
 Steve::Steve(int x, int y, int w, int h, char* label) : ModelerView(x, y, w, h, label)
 {
+	ik = new IK(5, 2);
+
 	if (ironTexture)
 		delete[] ironTexture;
 
@@ -158,8 +170,11 @@ void Steve::draw()
 	// Draw the floor
 	drawFloor();
 
-	// Draw the steve model
-	drawSteve();
+	if (ModelerUI::getIKActive())
+		drawMechanicalArm();
+	else
+		// Draw the steve model
+		drawSteve();
 	
 	endDraw();
 }
@@ -680,6 +695,19 @@ void Steve::drawTexturedBox(double x, double y, double z, int textureID, int tex
 	glDisable(GL_TEXTURE_2D);
 }
 
+void Steve::drawMechanicalArm()
+{
+	ik->setTarget(VAL(IK_X), VAL(IK_Y), VAL(IK_Z));
+	ik->show();
+
+	// Draw target ball
+	setDiffuseColor(COLOR_RED);
+	glPushMatrix();
+	glTranslated(VAL(IK_X), VAL(IK_Y), VAL(IK_Z));
+	drawSphere(0.5);
+	glPopMatrix();
+}
+
 int main()
 {
     ModelerControl controls[NUMCONTROLS];
@@ -694,8 +722,9 @@ int main()
 	controls[ROTATE_RIGHT_ARM_ELBOW] = ModelerControl("Rotate Right Arm Elbow", -20, 50, 1, 30);
 	controls[ROTATE_LEFT_ARM_SHOULDER] = ModelerControl("Rotate Left Arm Shoulder", -135, 135, 1, 0);
 	controls[ROTATE_LEFT_ARM_ELBOW] = ModelerControl("Rotate Left Arm Elbow", -20, 50, 1, 30);
-    
-
+	controls[IK_X] = ModelerControl("IK: X", -10, 10, 0.1, 2.5);
+	controls[IK_Y] = ModelerControl("IK: Y", -10, 10, 0.1, 2.5);
+	controls[IK_Z] = ModelerControl("IK: Z", -10, 10, 0.1, 0.5);
 
 	// You should create a ParticleSystem object ps here and then
 	// call ModelerApplication::Instance()->SetParticleSystem(ps)

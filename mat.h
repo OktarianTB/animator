@@ -16,10 +16,10 @@ class Mat3 {
 
 	//---[ Private Variable Declarations ]-----------------
 
-		// matrix elements in row major order
-	T		n[9];
 
 public:
+	// matrix elements in row major order
+	T		n[9];
 	
 	//---[ Constructors ]----------------------------------
 

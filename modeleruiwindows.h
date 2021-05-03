@@ -46,6 +46,7 @@ public:
   static Fl_Menu_Item *m_pmiSetTension; // for catmull-rom curve
   static Fl_Menu_Item* m_pmiSetFlatness; // for adaptive bezier curve
   static Fl_Menu_Item* m_pmiSkybox; // for activating skybox
+  static Fl_Menu_Item* m_pmiIK; // for activating IK
 
   Fl_Browser *m_pbrsBrowser;
   Fl_Tabs *m_ptabTab;
