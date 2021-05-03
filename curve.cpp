@@ -183,6 +183,11 @@ void Curve::addControlPoint(const Point& point)
 	m_bDirty = true;
 }
 
+void Curve::addUselessControlPoint(const Point& point)
+{
+	m_uselessCtrlPts.push_back(point);
+}
+
 void Curve::removeControlPoint(const int iCtrlPt)
 {
 	if (iCtrlPt < m_ptvCtrlPts.size() && m_ptvCtrlPts.size() > 2) {
@@ -398,6 +403,15 @@ void Curve::drawControlPoints() const
 			++kit) {
 			glVertex2f(kit->x, kit->y);
 		}
+	glEnd();
+
+	glColor3d(1, 0, 1);
+	glBegin(GL_POINTS);
+	for (std::vector<Point>::const_iterator kit = m_uselessCtrlPts.begin();
+		kit != m_uselessCtrlPts.end();
+		++kit) {
+		glVertex2f(kit->x, kit->y);
+	}
 	glEnd();
 
 	glPointSize(fPointSize);

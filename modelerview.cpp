@@ -8,6 +8,7 @@
 #include <FL/Fl_Gl_Window.h>
 #include <FL/gl.h>
 #include <GL/glu.h>
+#include <gl/GL.h>
 #include <cstdio>
 
 static const int	kMouseRotationButton			= FL_LEFT_MOUSE;

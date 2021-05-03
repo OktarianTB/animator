@@ -214,5 +214,11 @@
     <None Include="skelrenamer.pl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ToonShading.frag">
+      <Filter>Source Files\Model</Filter>
+    </None>
+    <None Include="ToonShading.vert">
+      <Filter>Source Files\Model</Filter>
+    </None>
   </ItemGroup>
 </Project>

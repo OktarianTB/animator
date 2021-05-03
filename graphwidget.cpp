@@ -66,6 +66,9 @@
 #define ALT_LEFT_DOWN		28
 #define ALT_LEFT_DRAG		29
 #define ALT_LEFT_UP			30
+#define ALT_RIGHT_DOWN		31
+#define ALT_RIGHT_DRAG		32
+#define ALT_RIGHT_UP		33
 
 #define GRID_BACKGROUND_INTENSITY 0.65f
 #define CURR_CURVE_INTENSITY 1.0f
@@ -327,7 +330,8 @@ void GraphWidget::draw()
 			case CTRL_RIGHT_UP:
 				endZoomSelection(m_iMouseX, m_iMouseY);
 				break;
-
+			case ALT_RIGHT_DOWN:
+				selectAddUselessCtrlPt(m_iMouseX, m_iMouseY);
 			default:
 				break;
 		}
@@ -367,6 +371,8 @@ int GraphWidget::handle(int event)
 					m_iEventToDo = SHIFT_RIGHT_DOWN;
 				else if (Fl::event_state(FL_CTRL))
 					m_iEventToDo = CTRL_RIGHT_DOWN;
+				else if (Fl::event_state(FL_ALT))
+					m_iEventToDo = ALT_RIGHT_DOWN;
 				else
 					m_iEventToDo = RIGHT_MOUSE_DOWN;
 				m_bRButtonDown = true;
@@ -604,6 +610,13 @@ void GraphWidget::selectAddCtrlPt(const int iMouseX, const int iMouseY)
 		m_ivvCurrCtrlPts[m_iCurrCurve].push_back(
 			m_pcrvvCurves[m_iCurrCurve]->getClosestControlPoint(ptMouseInCurveCoord, ptDummy));
 	}
+}
+
+void GraphWidget::selectAddUselessCtrlPt(const int iMouseX, const int iMouseY)
+{
+	Point ptMouse(iMouseX, iMouseY);
+	Point ptMouseInCurveCoord = windowToCurve(m_iCurrCurve, ptMouse);
+	m_pcrvvCurves[m_iCurrCurve]->addUselessControlPoint(ptMouseInCurveCoord);
 }
 
 void GraphWidget::removeCtrlPt(const int iMouseX, const int iMouseY)

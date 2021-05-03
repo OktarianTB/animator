@@ -27,6 +27,7 @@ public:
 	float evaluateCurveAt(const float x) const;
 	void scaleX(const float fScale);
 	void addControlPoint(const Point& point);
+	void addUselessControlPoint(const Point& point);
 	void removeControlPoint(const int iCtrlPt);
 	void removeControlPoint2(const int iCtrlPt);
 	void getControlPoint(const int iCtrlPt, Point& ptCtrlPt) const {
@@ -65,6 +66,7 @@ protected:
 
 	mutable std::vector<Point> m_ptvCtrlPts;
 	mutable std::vector<Point> m_ptvEvaluatedCurvePts;
+	mutable std::vector<Point> m_uselessCtrlPts;
 	mutable bool m_bDirty;
 
 	float m_fMaxX;

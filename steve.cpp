@@ -105,7 +105,7 @@ private:
 
 Steve::Steve(int x, int y, int w, int h, char* label) : ModelerView(x, y, w, h, label)
 {
-	ik = new IK(5, 2);
+	ik = new IK(10, 1);
 
 	if (ironTexture)
 		delete[] ironTexture;
@@ -697,8 +697,7 @@ void Steve::drawTexturedBox(double x, double y, double z, int textureID, int tex
 
 void Steve::drawMechanicalArm()
 {
-	ik->setTarget(VAL(IK_X), VAL(IK_Y), VAL(IK_Z));
-	ik->show();
+	ik->show(VAL(IK_X), VAL(IK_Y), VAL(IK_Z));
 
 	// Draw target ball
 	setDiffuseColor(COLOR_RED);

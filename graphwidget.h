@@ -159,6 +159,7 @@ protected:
 
 	void selectCurrCurve(const int iMouseX, const int iMouseY);
 	void selectAddCtrlPt(const int iMouseX, const int iMouseY);
+	void selectAddUselessCtrlPt(const int iMouseX, const int iMouseY);
 	void removeCtrlPt(const int iMouseX, const int iMouseY);
 	void dragCtrlPt(const int iMouseX, const int iMouseY);
 	void deselectCtrlPts();

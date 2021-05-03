@@ -3,11 +3,12 @@ Animator Bells and Whistles Checklist for grading
 
 HKUST login(s): ogt@connect.ust.hk + ashyntay@connect.ust.hk
 
-Total = 12.5B
+Total = 12-13B
 
 W spline control options			
 	- Control the tension of the Catmull-Rom spline		yes 	0.5B
 	- Lane Riesenfeld					yes 	0.5B
+	- New control point with no effect			yes	0.5B
 W TGA						yes/no
 W mirror					yes/no
 W billboard					yes/no
@@ -37,5 +38,5 @@ BW your great UI idea				yes/no
 3B cell shading					yes/no
 4B rigid-body simulations 			yes/no
 4B subdivision surfaces				yes/no
-8B Inverse kinematics						yes 8B (still incomplete)
+8B Inverse kinematics						yes 	7-8B (according to Prof.)
 8B+ mouse/keyboard computer games (using IK)	yes/no

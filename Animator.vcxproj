@@ -301,6 +301,8 @@
     <None Include="cleanskel.pl" />
     <None Include="modeleruiwindows.fl" />
     <None Include="skelrenamer.pl" />
+    <None Include="ToonShading.frag" />
+    <None Include="ToonShading.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
