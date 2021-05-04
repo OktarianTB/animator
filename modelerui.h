@@ -46,6 +46,7 @@ public:
 	static float getFlatness() { return curveFlatness; }
 	static bool getSkyboxActive() { return skyboxActive; }
 	static bool getIKActive() { return IKActive; }
+	static bool getHeightMapActive() { return HeightMapActive; }
 
 protected:
 
@@ -73,6 +74,7 @@ private:
 	static float curveFlatness; // adaptive bezier curve flatness
 	static bool skyboxActive; // for skybox
 	static bool IKActive; // for skybox
+	static bool HeightMapActive; // for height map
 
 	inline void cb_openAniScript_i(Fl_Menu_*, void*);
 	static void cb_openAniScript(Fl_Menu_*, void*);
@@ -112,6 +114,8 @@ private:
 	static void cb_skybox(Fl_Menu_*, void*);
 	inline void cb_IK_i(Fl_Menu_*, void*);
 	static void cb_IK(Fl_Menu_*, void*);
+	inline void cb_HeightMap_i(Fl_Menu_*, void*);
+	static void cb_HeightMap(Fl_Menu_*, void*);
 
 	inline void cb_fps_i(Fl_Slider*, void*);
 	static void cb_fps(Fl_Slider*, void*);

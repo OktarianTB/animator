@@ -3,12 +3,12 @@ Animator Bells and Whistles Checklist for grading
 
 HKUST login(s): ogt@connect.ust.hk + ashyntay@connect.ust.hk
 
-Total = 12-13B
+Total = 13-14B
 
 W spline control options			
 	- Control the tension of the Catmull-Rom spline		yes 	0.5B
 	- Lane Riesenfeld					yes 	0.5B
-	- New control point with no effect			yes	0.5B
+	- New control point w/ no effect (ALT + Right click)	yes	0.5B
 W TGA						yes/no
 W mirror					yes/no
 W billboard					yes/no
@@ -23,7 +23,7 @@ W de Casteljau							yes	1B
 B spring-mass system				yes/no
 B collision detection AND handling		yes/no
 B general subdvision curves			yes/no
-B height fields					yes/no
+B height fields							yes	1B
 B metaballs					yes/no
 BW lens flare					yes/no
 BW your great UI idea				yes/no

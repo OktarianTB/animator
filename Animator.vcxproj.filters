@@ -120,6 +120,9 @@
     <ClCompile Include="IK.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="HeightMap.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="curve.h">
@@ -201,6 +204,9 @@
       <Filter>Header Files\Curves.</Filter>
     </ClInclude>
     <ClInclude Include="IK.h">
+      <Filter>Header Files\Model.</Filter>
+    </ClInclude>
+    <ClInclude Include="HeightMap.h">
       <Filter>Header Files\Model.</Filter>
     </ClInclude>
   </ItemGroup>

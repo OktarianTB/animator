@@ -163,6 +163,7 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="IK.cpp" />
     <ClCompile Include="laneriesenfeldcurveevaluator.cpp" />
     <ClCompile Include="linearcurveevaluator.cpp">
@@ -276,6 +277,7 @@
     <ClInclude Include="catmullromcurveevaluator.h" />
     <ClInclude Include="curve.h" />
     <ClInclude Include="curveevaluator.h" />
+    <ClInclude Include="HeightMap.h" />
     <ClInclude Include="IK.h" />
     <ClInclude Include="laneriesenfeldcurveevaluator.h" />
     <ClInclude Include="linearcurveevaluator.h" />

@@ -25,6 +25,7 @@ Fl_Menu_Item ModelerUIWindows::menu_m_pmbMenuBar[] = {
  {"&Set Flatness", 0,  0, 0, 0, 0, 0, 14, 0},
  {"&Skybox", 0,  0, 0, 2, 0, 0, 14, 0},
  {"&Inverse Kinematics", 0,  0, 0, 2, 0, 0, 14, 0},
+ {"&Height Map", 0,  0, 0, 2, 0, 0, 14, 0},
  {0},
  {0}
 };
@@ -47,6 +48,7 @@ Fl_Menu_Item* ModelerUIWindows::m_pmiSetTension = ModelerUIWindows::menu_m_pmbMe
 Fl_Menu_Item* ModelerUIWindows::m_pmiSetFlatness = ModelerUIWindows::menu_m_pmbMenuBar + 19;
 Fl_Menu_Item* ModelerUIWindows::m_pmiSkybox = ModelerUIWindows::menu_m_pmbMenuBar + 20;
 Fl_Menu_Item* ModelerUIWindows::m_pmiIK = ModelerUIWindows::menu_m_pmbMenuBar + 21;
+Fl_Menu_Item* ModelerUIWindows::m_pmiHeightMap = ModelerUIWindows::menu_m_pmbMenuBar + 22;
 
 
 Fl_Menu_Item ModelerUIWindows::menu_m_pchoCurveType[] = {

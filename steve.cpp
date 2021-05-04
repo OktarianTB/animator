@@ -12,6 +12,7 @@
 #include "particleSystem.h"
 #include "camera.h"
 #include "IK.h"
+#include "HeightMap.h"
 
 #include <FL/gl.h>
 #include <stdlib.h>
@@ -85,6 +86,7 @@ public:
 	void drawMechanicalArm();
 private:
 	IK* ik;
+	HeightMap* heightMap;
 
 	int ironTextureWidth, ironTextureHeight;
 	GLubyte* ironTexture = NULL;
@@ -106,6 +108,7 @@ private:
 Steve::Steve(int x, int y, int w, int h, char* label) : ModelerView(x, y, w, h, label)
 {
 	ik = new IK(10, 1);
+	heightMap = new HeightMap("heightmap2.bmp");
 
 	if (ironTexture)
 		delete[] ironTexture;
@@ -168,10 +171,13 @@ void Steve::draw()
 		drawSkybox();
 
 	// Draw the floor
-	drawFloor();
+	if (!ModelerUI::getHeightMapActive())
+		drawFloor();
 
 	if (ModelerUI::getIKActive())
 		drawMechanicalArm();
+	else if (ModelerUI::getHeightMapActive())
+		heightMap->render();
 	else
 		// Draw the steve model
 		drawSteve();
