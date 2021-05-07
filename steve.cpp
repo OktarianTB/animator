@@ -189,7 +189,7 @@ void Steve::draw()
 		drawSteve();
 	
 	// Draw the particle system
-	drawParticleSystem(CameraMatrix, VAL(PARTICLE_COUNT));
+	//drawParticleSystem(CameraMatrix, VAL(PARTICLE_COUNT));
 
 	endDraw();
 }
@@ -370,6 +370,9 @@ void Steve::drawHead()
 			glTranslated(0.7, -0.3, 0.3);
 			drawCylinder(0.3, 0.05, 0.05);
 			glRotated(90, 1.0, 0.0, 0.0);
+			// Particles
+			Mat4d CameraMatrix = getModelViewMatrix();
+			drawParticleSystem(CameraMatrix, VAL(PARTICLE_COUNT));
 			// Waves
 			drawRadioWaves();
 			glPopMatrix();
@@ -396,7 +399,6 @@ void Steve::drawRadioWaves()
 	drawTorus(0.4);
 	glTranslated(0, 0.8, 0);
 	drawTorus(0.5);
-
 	glPopMatrix();
 	// END RADIO WAVES
 }
@@ -752,9 +754,11 @@ void Steve::drawParticleSystem(Mat4d CameraMatrix, int particle_count)
 	Mat4d ModelMatrix = getModelViewMatrix();
 	Mat4d WorldMatrix = CameraMatrix.inverse() * ModelMatrix;
 
-	Vec4d pos = WorldMatrix * Vec4d(-0.5, 6.8, 0.27, 0.0);
+	Vec4d pos = WorldMatrix * Vec4d(0.0, 0.0, 0.0, 0.0);
 	ParticleSystem* ps = ModelerApplication::Instance()->GetParticleSystem();
 	ps->spawnParticles(Vec3d(pos[0], pos[1], pos[2]), particle_count);
+	ps->computeForcesAndUpdateParticles(t);
+	ps->drawParticles(t);
 }
 
 int main()
