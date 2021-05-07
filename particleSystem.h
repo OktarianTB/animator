@@ -17,18 +17,19 @@
 #define __PARTICLE_SYSTEM_H__
 
 #include "vec.h"
+#include "force.h"
+#include "particle.h"
 
+#include <vector>
+#include <map>
 
 
 class ParticleSystem {
 
 public:
-
-
-
 	/** Constructor **/
-	ParticleSystem();
-
+	//ParticleSystem();
+	ParticleSystem(Vec3d gForGravity, double kForDrag);
 
 	/** Destructor **/
 	virtual ~ParticleSystem();
@@ -62,7 +63,15 @@ public:
 	// of baked particles (without leaking memory).
 	virtual void clearBaked();	
 
+	// Check whether is baked or not at time t
+	virtual bool isBaked(float t);
 
+	// The SpawnParticles function is responsible for generating new 
+	// particles in your world.  You will call this function as you 
+	// you traverse your model's hierarchy.  When you reach a point
+	// in the hierarchy from where particles should be emitted, 
+	// call this function!
+	void spawnParticles(Vec3d pos, int particle_count);
 
 	// These accessor fxns are implemented for you
 	float getBakeStartTime() { return bake_start_time; }
@@ -73,11 +82,7 @@ public:
 	void setDirty(bool d) { dirty = d; }
 
 
-
 protected:
-	
-
-
 	/** Some baking-related state **/
 	float bake_fps;						// frame rate at which simulation was baked
 	float bake_start_time;				// time at which baking started 
@@ -89,6 +94,11 @@ protected:
 	bool simulate;						// flag for simulation mode
 	bool dirty;							// flag for updating ui (don't worry about this)
 
+	vector<Particle> particles;
+	vector<Force*> forces;
+
+	float current_time;
+	map<float, vector<Particle>> bake_map;
 };
 
 

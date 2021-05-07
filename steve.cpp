@@ -82,6 +82,10 @@ public:
 	void drawRightArm();
 	void drawFace();
 
+	// Particle system
+	Mat4d getModelViewMatrix();
+	void drawParticleSystem(Mat4d CameraMatrix, int particle_count);
+
 	// Inverse kinematics
 	void drawMechanicalArm();
 private:
@@ -166,6 +170,8 @@ void Steve::draw()
 	// This call takes care of a lot of the nasty projection matrix stuff
 	ModelerView::draw();
 
+	Mat4d CameraMatrix = getModelViewMatrix();
+
 	// Draw skybox
 	if(ModelerUI::getSkyboxActive())
 		drawSkybox();
@@ -182,6 +188,9 @@ void Steve::draw()
 		// Draw the steve model
 		drawSteve();
 	
+	// Draw the particle system
+	drawParticleSystem(CameraMatrix, VAL(PARTICLE_COUNT));
+
 	endDraw();
 }
 
@@ -713,6 +722,41 @@ void Steve::drawMechanicalArm()
 	glPopMatrix();
 }
 
+Mat4d Steve::getModelViewMatrix() {
+	/**************************
+	**
+	** GET THE OPENGL MODELVIEW MATRIX
+	**
+	** Since OpenGL stores it's matricies in
+	** column major order and our library
+	** use row major order, we will need to
+	** transpose what OpenGL gives us before returning.
+	**
+	*******************************/
+	GLdouble m[16];
+	glGetDoublev(GL_MODELVIEW_MATRIX, m);
+	Mat4d matMV(m[0], m[1], m[2], m[3],
+		m[4], m[5], m[6], m[7],
+		m[8], m[9], m[10], m[11],
+		m[12], m[13], m[14], m[15]);
+
+	return matMV.transpose();
+}
+
+void Steve::drawParticleSystem(Mat4d CameraMatrix, int particle_count)
+{
+	// Get the current MODELVIEW matrix.
+	// "Undo" the camera transforms from the MODELVIEW matrix
+	// by multiplying Inverse(CameraTransforms) * CurrentModelViewMatrix.
+	// Store the result of this in a local variable called WorldMatrix.
+	Mat4d ModelMatrix = getModelViewMatrix();
+	Mat4d WorldMatrix = CameraMatrix.inverse() * ModelMatrix;
+
+	Vec4d pos = WorldMatrix * Vec4d(-0.5, 6.8, 0.27, 0.0);
+	ParticleSystem* ps = ModelerApplication::Instance()->GetParticleSystem();
+	ps->spawnParticles(Vec3d(pos[0], pos[1], pos[2]), particle_count);
+}
+
 int main()
 {
     ModelerControl controls[NUMCONTROLS];
@@ -730,10 +774,13 @@ int main()
 	controls[IK_X] = ModelerControl("IK: X", -10, 10, 0.1, 2.5);
 	controls[IK_Y] = ModelerControl("IK: Y", -10, 10, 0.1, 2.5);
 	controls[IK_Z] = ModelerControl("IK: Z", -10, 10, 0.1, 0.5);
+	controls[PARTICLE_COUNT] = ModelerControl("Particles number", 0, 100, 1, 15);
 
 	// You should create a ParticleSystem object ps here and then
 	// call ModelerApplication::Instance()->SetParticleSystem(ps)
 	// to hook it up to the animator interface.
+	ParticleSystem* ps = new ParticleSystem(Vec3d(0, -4, 0), 0.2);
+	ModelerApplication::Instance()->SetParticleSystem(ps);
 
     ModelerApplication::Instance()->Init(&createSteve, controls, NUMCONTROLS);
 
